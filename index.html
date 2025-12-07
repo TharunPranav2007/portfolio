@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tharun Pranav T Portfolio</title>
+    
+    <link rel="icon" type="image/jpeg" href="resources/favicon.jpeg">
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --bg-dark: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.6);
+            --bg-card-hover: rgba(30, 41, 59, 0.8);
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --gradient-accent: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+            --glow-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+            --radius-large: 24px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+            overflow: hidden; 
+        }
+
+        /* --- GLOBAL LINK RESET --- */
+        a { 
+            text-decoration: none !important; 
+            color: inherit; 
+            transition: all 0.3s ease; 
+            border-bottom: none !important;
+        }
+
+        /* --- ANIMATIONS --- */
+        .background-shapes {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; overflow: hidden; pointer-events: none;
+        }
+        .shape {
+            position: absolute; filter: blur(100px); opacity: 0.25;
+            animation: float 15s infinite alternate ease-in-out;
+        }
+        .shape-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #4f46e5; }
+        .shape-2 { bottom: -10%; right: -10%; width: 40vw; height: 40vw; background: #db2777; animation-delay: -5s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 50px); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- LAYOUT --- */
+        .main-layout {
+            display: flex;
+            gap: 25px;
+            width: 100%;
+            max-width: 1400px;
+            height: calc(100vh - 80px);
+        }
+
+        /* --- LEFT SIDEBAR --- */
+        .sidebar {
+            width: 320px;
+            background: var(--bg-card);
+            border: var(--glass-border);
+            border-radius: var(--radius-large);
+            padding: 50px 30px;
+            backdrop-filter: blur(20px);
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+            overflow-y: auto;
+            flex-shrink: 0;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .sidebar::-webkit-scrollbar { width: 0px; }
+
+        .profile-img-container {
+            width: 150px; height: 150px;
+            border-radius: 24px;
+            overflow: hidden; margin-bottom: 25px;
+            border: 2px solid rgba(255,255,255,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            flex-shrink: 0;
+            transition: transform 0.3s;
+        }
+        .profile-img-container:hover { transform: scale(1.02); border-color: var(--primary); }
+        .profile-img { width: 100%; height: 100%; object-fit: cover; }
+
+        .sidebar h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; color: #fff; letter-spacing: -0.5px; }
+        .sidebar .role-badge {
+            background: rgba(255,255,255,0.03);
+            padding: 6px 16px; border-radius: 50px;
+            font-size: 0.85rem; font-weight: 500; color: var(--text-muted);
+            margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .sidebar-socials { display: flex; gap: 15px; margin-bottom: 30px; }
+        .sidebar-social-link {
+            width: 42px; height: 42px;
+            background: rgba(255,255,255,0.05); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; transition: 0.3s; border: var(--glass-border);
+            text-decoration: none !important;
+            font-size: 1.1rem;
+        }
+        .sidebar-social-link:hover { 
+            background: var(--gradient-accent); transform: translateY(-3px); 
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4); 
+        }
+
+        .btn-sidebar {
+            width: 100%; padding: 14px;
+            background: var(--gradient-accent);
+            color: white; border-radius: 12px;
+            font-weight: 600; border: none;
+            cursor: pointer; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            margin-bottom: 35px;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25);
+            text-decoration: none !important;
+        }
+        .btn-sidebar:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(99, 102, 241, 0.4); }
+
+        .sidebar-divider { width: 100%; height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 35px; }
+
+        .contact-list { width: 100%; display: flex; flex-direction: column; gap: 25px; }
+        .contact-item { display: flex; align-items: center; gap: 15px; text-align: left; }
+        .icon-box {
+            width: 45px; height: 45px;
+            background: rgba(255,255,255,0.03); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--secondary); font-size: 1.2rem;
+            border: var(--glass-border); flex-shrink: 0;
+            transition: 0.3s;
+        }
+        .contact-item:hover .icon-box { background: rgba(255,255,255,0.08); color: #fff; }
+        .contact-info small { display: block; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
+        .contact-info span { font-size: 0.95rem; font-weight: 500; color: #fff; }
+
+
+        /* --- RIGHT CONTENT AREA --- */
+        .content-area {
+            flex: 1;
+            background: var(--bg-card);
+            border: var(--glass-border);
+            border-radius: var(--radius-large);
+            backdrop-filter: blur(20px);
+            position: relative;
+            display: flex; flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: absolute; top: 0; right: 0;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom-left-radius: 30px;
+            border-left: var(--glass-border);
+            border-bottom: var(--glass-border);
+            padding: 20px 40px;
+            z-index: 100;
+            display: flex; gap: 30px;
+        }
+        .navbar a { 
+            font-weight: 700;
+            color: #fff;
+            font-size: 0.95rem; 
+            position: relative; 
+            transition: 0.3s;
+            text-shadow: 0 0 5px rgba(0,0,0,0.2); 
+            text-decoration: none !important;
+        }
+        .navbar a:hover { 
+            color: var(--secondary); 
+            text-shadow: 0 0 10px rgba(236, 72, 153, 0.4); 
+        }
+        .navbar a.active { color: var(--secondary); }
+        .navbar a.active::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px; background: var(--secondary);
+        }
+
+        /* Page Content Scrollable */
+        .page-content {
+            padding: 50px 60px;
+            padding-top: 100px;
+            overflow-y: auto;
+            height: 100%;
+        }
+        .page-content::-webkit-scrollbar { width: 6px; }
+        .page-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+
+        /* Sections */
+        .section-header { margin-bottom: 35px; }
+        .section-header h2 {
+            font-size: 2rem; font-weight: 800; color: #fff;
+            position: relative; display: inline-block;
+        }
+        .section-header h2::after {
+            content: ''; display: block; width: 100%; height: 4px; 
+            background: var(--gradient-accent); margin-top: 8px; border-radius: 2px;
+            opacity: 0.8;
+        }
+
+        .about-text { font-size: 1.05rem; color: #cbd5e1; line-height: 1.8; max-width: 850px; }
+
+        /* Tech Grid */
+        .tech-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .tech-tile {
+            background: rgba(255,255,255,0.02);
+            border: var(--glass-border);
+            padding: 25px 15px; border-radius: 16px;
+            text-align: center; transition: 0.3s;
+        }
+        .tech-tile:hover {
+            background: rgba(255,255,255,0.05); transform: translateY(-5px); 
+            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: var(--glow-shadow);
+        }
+        .tech-tile i { 
+            font-size: 2.2rem; margin-bottom: 15px; 
+            background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+        }
+        .tech-tile h3 { font-size: 0.95rem; font-weight: 600; color: #fff; }
+
+        /* Experience */
+        .timeline-item { position: relative; padding-left: 35px; margin-bottom: 35px; border-left: 2px solid rgba(255,255,255,0.1); }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -7px; top: 0; width: 12px; height: 12px;
+            background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary);
+        }
+        .timeline-role { font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+        .timeline-company { font-size: 0.95rem; color: var(--secondary); font-weight: 600; display: block; margin-bottom: 4px; }
+        .timeline-date { font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 12px; font-style: italic; }
+        
+        .timeline-desc { list-style: none !important; padding: 0; margin: 0; }
+        .timeline-desc li { 
+            font-size: 0.95rem; color: #cbd5e1; margin-bottom: 6px; 
+            position: relative; padding-left: 20px; 
+            list-style: none !important;
+        }
+        .timeline-desc li::before { 
+            content: '▹'; position: absolute; left: 0; color: var(--text-muted); font-weight: bold;
+        }
+
+        /* Projects */
+        .projects-wrapper { display: grid; grid-template-columns: 1fr; gap: 30px; }
+        .project-card {
+            background: rgba(255,255,255,0.02);
+            border: var(--glass-border);
+            padding: 30px; border-radius: 20px;
+            transition: 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-5px); border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            background: rgba(255,255,255,0.04);
+        }
+        .project-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+        .project-top h3 { font-size: 1.4rem; font-weight: 700; color: #fff; }
+        
+        .project-links { display: flex; align-items: center; gap: 12px; }
+
+        .live-demo-btn {
+            background: rgba(99, 102, 241, 0.15);
+            color: #6366f1;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            text-decoration: none !important;
+        }
+        .live-demo-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .icon-btn { 
+            font-size: 1.4rem; 
+            color: var(--text-muted); 
+            transition: 0.3s; 
+            display: flex; 
+            align-items: center; 
+            padding: 8px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+            text-decoration: none !important;
+        }
+        .icon-btn:hover { 
+            color: #fff; 
+            background: rgba(255,255,255,0.1); 
+            transform: translateY(-2px);
+        }
+
+        .project-points { list-style: none !important; padding: 0; margin: 0; }
+        .project-points li {
+            margin-bottom: 8px; padding-left: 20px; position: relative; color: #cbd5e1; font-size: 1rem;
+            list-style: none !important;
+        }
+        .project-points li::before {
+            content: '▹'; position: absolute; left: 0; color: var(--secondary); font-weight: bold;
+        }
+
+        /* Certifications */
+        .cert-list { display: flex; flex-direction: column; gap: 15px; }
+        .cert-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 18px 25px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 16px; border: var(--glass-border);
+            cursor: pointer; transition: 0.3s;
+            text-decoration: none !important;
+        }
+        .cert-item:hover { 
+            background: rgba(255,255,255,0.06); border-color: var(--primary); 
+            transform: translateX(5px);
+        }
+        .cert-name { font-weight: 600; color: #f1f5f9; font-size: 1rem; }
+        .cert-icon { color: var(--secondary); font-size: 1.1rem; }
+
+        /* Contact Grid */
+        .contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .contact-card {
+            background: rgba(255,255,255,0.02); border: var(--glass-border);
+            padding: 25px; border-radius: 16px; text-align: center;
+            transition: 0.3s; cursor: pointer; display: flex; flex-direction: column; align-items: center;
+            text-decoration: none !important;
+        }
+        .contact-card:hover { 
+            background: rgba(99, 102, 241, 0.15); border-color: var(--primary); 
+            transform: translateY(-5px); box-shadow: var(--glow-shadow);
+        }
+        .contact-card i { font-size: 1.8rem; color: #fff; margin-bottom: 12px; }
+        .contact-card span { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; }
+
+        /* Mobile */
+        .mobile-toggle {
+            display: none; position: fixed; top: 15px; right: 15px; z-index: 200;
+            background: #1e293b; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);
+            color: #fff; font-size: 1.4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .tech-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 992px) {
+            body { padding: 15px; display: block; overflow-y: auto; }
+            .main-layout { flex-direction: column; height: auto; display: block; }
+            .sidebar { 
+                width: 100%; position: relative; top: 0; height: auto; 
+                margin-bottom: 30px; 
+            }
+            .content-area { height: auto; overflow: visible; }
+            .page-content { padding: 30px; padding-top: 20px; }
+            .navbar { display: none; }
+            .mobile-toggle { display: block; }
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+
+    <div class="mobile-toggle">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <div class="main-layout">
+        
+        <aside class="sidebar">
+            <div class="profile-img-container">
+                <img src="resources/image.jpeg" alt="Tharun Pranav" class="profile-img">
+            </div>
+            
+            <h1>Tharun Pranav T</h1>
+            <div class="role-badge">Aspiring Data Scientist</div>
+
+            <div class="sidebar-socials">
+                <a href="https://linkedin.com/in/tharunpranavt" target="_blank" class="sidebar-social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/TharunPranav2007" target="_blank" class="sidebar-social-link"><i class="fab fa-github"></i></a>
+            </div>
+
+            <a href="resources/Resume.pdf" download="Tharun_Pranav_Resume" class="btn-sidebar">
+                <i class="fas fa-download"></i> Download Resume
+            </a>
+
+            <div class="sidebar-divider"></div>
+
+            <div class="contact-list">
+                <div class="contact-item">
+                    <div class="icon-box"><i class="fas fa-envelope"></i></div>
+                    <div class="contact-info">
+                        <small>Email</small>
+                        <span>tharunpranavt2606@gmail.com</span>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="icon-box"><i class="fas fa-phone-alt"></i></div>
+                    <div class="contact-info">
+                        <small>Phone</small>
+                        <span>+91 9360820944</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+
+        <main class="content-area">
+            
+            <nav class="navbar">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#certifications">Certifications</a>
+                <a href="#contact">Contact</a>
+            </nav>
+
+            <div class="page-content">
+
+                <section id="about">
+                    <div class="section-header">
+                        <h2>About Me</h2>
+                    </div>
+                    <div class="about-text">
+                        <p>I am a driven and analytical Computer Science Engineering student with a deep passion for data analytics and problem-solving. My work involves transforming raw data into actionable insights and building intelligent applications that bridge the gap between complexity and usability.</p>
+                        <br>
+                        <p>Currently, I am exploring the depths of Machine Learning and Cloud Technologies, constantly learning and applying new skills to solve real-world challenges.</p>
+                    </div>
+                </section>
+
+                <div style="height: 60px;"></div>
+
+                <section id="skills">
+                    <div class="section-header"><h2>Technical Arsenal</h2></div>
+                    <div class="tech-grid">
+                        <div class="tech-tile"><i class="fab fa-python"></i><h3>Python</h3></div>
+                        <div class="tech-tile"><i class="fas fa-database"></i><h3>SQL & MySQL</h3></div>
+                        <div class="tech-tile"><i class="fas fa-chart-bar"></i><h3>Power BI</h3></div>
+                        <div class="tech-tile"><i class="fab fa-java"></i><h3>Java</h3></div>
+                        <div class="tech-tile"><i class="fas fa-robot"></i><h3>Machine Learning</h3></div>
+                        <div class="tech-tile"><i class="fas fa-bolt"></i><h3>Streamlit</h3></div>
+                        <div class="tech-tile"><i class="fas fa-table"></i><h3>Pandas & NumPy</h3></div>
+                        <div class="tech-tile"><i class="fas fa-code"></i><h3>C Programming</h3></div>
+                    </div>
+                </section>
+
+                <div style="height: 60px;"></div>
+
+                <section id="experience">
+                    <div class="section-header"><h2>Experience</h2></div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-role">AI & Cloud Technologies Intern</div>
+                        <span class="timeline-company">Edunet Foundation - IBM SkillsBuild</span>
+                        <span class="timeline-date">Sep 2025 - Oct 2025</span>
+                        <ul class="timeline-desc">
+                            <li>Developed AI-based applications using Python and integrated external APIs.</li>
+                            <li>Deployed an AI web app on Streamlit Cloud with GitHub for version control and deployment.</li>
+                            <li>Gained hands-on experience in machine learning, data processing, and cloud deployment.</li>
+                            <li>Enhanced technical and problem-solving skills through mentorship under IBM SkillsBuild.</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-role">Data Science Intern</div>
+                        <span class="timeline-company">SmartEd Innovations</span>
+                        <span class="timeline-date">Feb 2025 - May 2025</span>
+                        <ul class="timeline-desc">
+                            <li>Assisted in data collection, cleaning, and preprocessing for analysis.</li>
+                            <li>Performed Exploratory Data Analysis (EDA) to identify patterns and trends.</li>
+                            <li>Utilized Pandas, NumPy, and Matplotlib for data visualization.</li>
+                            <li>Collaborated with the team to present findings and provide data-driven recommendations.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <div style="height: 60px;"></div>
+
+                <section id="projects">
+                    <div class="section-header"><h2>Featured Projects</h2></div>
+                    <div class="projects-wrapper">
+                        
+                        <div class="project-card">
+                            <div class="project-top">
+                                <h3>ChefBot - AI Recipe Generator</h3>
+                                <div class="project-links">
+                                    <a href="https://chefbot-ai-recipie-geneartor-tharun-pranav-t.streamlit.app/" target="_blank" class="live-demo-btn">
+                                        <i class="fas fa-external-link-alt"></i> Live Demo
+                                    </a>
+                                    <a href="https://github.com/TharunPranav2007/ChefBot" target="_blank" class="icon-btn">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <ul class="project-points">
+                                <li>Created an AI-powered recipe generation web app using Python, Streamlit, and Google Generative AI API.</li>
+                                <li>Integrated external APIs to generate personalized recipes based on user input.</li>
+                                <li>Deployed the app on Streamlit Cloud via GitHub, demonstrating skills in API integration.</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-top">
+                                <h3>Credit Card Default Prediction</h3>
+                                <div class="project-links">
+                                    <a href="https://github.com/TharunPranav2007/Credit_Card_Default_Prediction" target="_blank" class="icon-btn">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <ul class="project-points">
+                                <li>Built a machine learning model to predict credit card default probability using Python.</li>
+                                <li>Implemented data preprocessing, feature engineering, model training, and performance evaluation.</li>
+                                <li>Developed an interactive Streamlit app for real-time prediction and data visualization.</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-top">
+                                <h3>Restaurant Billing System</h3>
+                                <div class="project-links">
+                                    <a href="https://github.com/TharunPranav2007" target="_blank" class="icon-btn">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <ul class="project-points">
+                                <li>Designed and developed a GUI-based restaurant billing system using Python, SQL, and Tkinter.</li>
+                                <li>Implemented features for menu management, total calculation, and bill generation.</li>
+                                <li>Integrated an SQL database for storing and retrieving order details efficiently.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </section>
+
+                <div style="height: 60px;"></div>
+
+                <section id="certifications">
+                    <div class="section-header"><h2>Certifications</h2></div>
+                    <div class="cert-list">
+                        <a href="resources/1.pdf" target="_blank" class="cert-item">
+                            <span class="cert-name">Oracle Cloud Infrastructure Data Science Professional</span>
+                            <i class="fas fa-file-pdf cert-icon"></i>
+                        </a>
+                        <a href="resources/2.pdf" target="_blank" class="cert-item">
+                            <span class="cert-name">Google Analytics Certification</span>
+                            <i class="fas fa-file-pdf cert-icon"></i>
+                        </a>
+                        <a href="resources/3.pdf" target="_blank" class="cert-item">
+                            <span class="cert-name">Oracle Analytics Cloud Certified Professional</span>
+                            <i class="fas fa-file-pdf cert-icon"></i>
+                        </a>
+                        <a href="resources/4.pdf" target="_blank" class="cert-item">
+                            <span class="cert-name">SQL (Intermediate)</span>
+                            <i class="fas fa-file-pdf cert-icon"></i>
+                        </a>
+                        <a href="resources/5.pdf" target="_blank" class="cert-item">
+                            <span class="cert-name">Artificial Intelligence Fundamentals</span>
+                            <i class="fas fa-file-pdf cert-icon"></i>
+                        </a>
+                    </div>
+                </section>
+
+                <div style="height: 60px;"></div>
+
+                <section id="contact">
+                    <div class="section-header"><h2>Contact Me</h2></div>
+                    <div class="contact-grid">
+                        <a href="mailto:tharunpranavt2606@gmail.com" class="contact-card">
+                            <i class="fas fa-envelope"></i>
+                            <span>Email Me</span>
+                        </a>
+                        <a href="https://linkedin.com/in/tharunpranavt" target="_blank" class="contact-card">
+                            <i class="fab fa-linkedin-in"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://github.com/TharunPranav2007" target="_blank" class="contact-card">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="tel:+919360820944" class="contact-card">
+                            <i class="fas fa-phone"></i>
+                            <span>Call Me</span>
+                        </a>
+                    </div>
+                </section>
+
+                <div style="height: 40px;"></div>
+                <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem;">&copy; 2025 Tharun Pranav T.</p>
+
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
